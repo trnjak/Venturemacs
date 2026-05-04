@@ -1,0 +1,203 @@
+#+TITLE: Venturemacs
+
+[[file:venturemacs.png]]
+
+* About
+These files were made to make Emacs usable on modern macOS, as well as make it look cool.
+
+* Install
+#+BEGIN_SRC shell
+git clone https://github.com/trnjak/Venturemacs.git ~/.emacs.d/
+#+END_SRC
+
+After installing, the first run of Emacs will take a bit longer, as it has to install the packages listed in the README.org file for the first time.
+
+* Configuration
+** for macOS
+#+BEGIN_SRC emacs-lisp
+(setq mac-option-modifier 'meta)
+(setq mac-command-modifier 'super)
+(use-package exec-path-from-shell
+ :ensure t
+ :config
+(when (memq window-system '(mac ns x))
+(exec-path-from-shell-initialize)))
+#+END_SRC  
+
+** line numbers
+#+BEGIN_SRC emacs-lisp
+(add-hook 'prog-mode-hook 'display-line-numbers-mode)
+#+END_SRC  
+
+** parent parentheses
+#+BEGIN_SRC emacs-lisp
+(show-paren-mode 1)
+#+END_SRC  
+
+** default startup screen off
+#+BEGIN_SRC emacs-lisp
+(setq inhibit-startup-message t)
+#+END_SRC  
+
+** most gui off
+#+BEGIN_SRC emacs-lisp
+(tool-bar-mode -1)
+(menu-bar-mode -1)
+(scroll-bar-mode -1)
+#+END_SRC  
+
+** clipboard outside of emacs on
+#+BEGIN_SRC emacs-lisp
+(setq x-select-enable-clipboard t)
+#+END_SRC  
+
+** disable backup files
+#+BEGIN_SRC emacs-lisp
+(setq make-backup-files nil)
+(setq auto-save-default nil)
+#+END_SRC  
+
+** disable ring-bell
+#+BEGIN_SRC emacs-lisp
+(setq ring-bell-function 'ignore)
+#+END_SRC  
+
+** highlight line
+#+BEGIN_SRC emacs-lisp
+(global-hl-line-mode t)
+#+END_SRC  
+
+** transform yes-or-no into y-or-n
+#+BEGIN_SRC emacs-lisp
+(defalias 'yes-or-no-p 'y-or-n-p)
+#+END_SRC  
+
+** creating new window switches cursor
+#+BEGIN_SRC emacs-lisp
+(defun split-and-follow-horizontally ()
+(interactive)
+(split-window-below)
+(balance-windows)
+(other-window 1))
+(global-set-key (kbd "C-x 2") 'split-and-follow-horizontally)  
+
+(defun split-and-follow-vertically ()
+(interactive)
+(split-window-right)
+(balance-windows)
+(other-window 1))
+(global-set-key (kbd "C-x 3") 'split-and-follow-vertically)
+#+END_SRC  
+
+** diminish
+#+BEGIN_SRC emacs-lisp
+(use-package diminish
+ :ensure t)
+#+END_SRC  
+
+** init spaceline and powerline
+#+BEGIN_SRC emacs-lisp
+(use-package spaceline
+ :ensure t)  
+
+(use-package powerline
+ :ensure t
+ :init
+(spaceline-spacemacs-theme)
+ :hook
+(after-init . powerline-reset))
+#+END_SRC  
+
+** init dashboard
+#+BEGIN_SRC emacs-lisp
+(use-package dashboard
+ :ensure t
+ :config
+(dashboard-setup-startup-hook)
+(setq dashboard-banner-logo-title "V E N T U R E M A C S")
+(setq dashboard-startup-banner (expand-file-name "venturemacs.png" user-emacs-directory))
+(setq dashboard-footer-messages '("It's Venture!"))
+(setq dashboard-items '((recents . 5)))
+(setq dashboard-center-content t)
+(setq dashboard-items-default-alignment 'center)
+(setq dashboard-set-heading-icons t)
+(setq dashboard-set-file-icons t))
+#+END_SRC  
+
+** completion ui init
+#+BEGIN_SRC emacs-lisp
+(use-package vertico
+ :ensure t
+ :init
+(vertico-mode))  
+
+(use-package orderless
+ :ensure t
+ :custom
+(completion-styles '(orderless basic)))  
+
+(use-package marginalia
+ :ensure t
+ :init
+(marginalia-mode))
+#+END_SRC  
+
+** programming stuff below
+#+BEGIN_SRC emacs-lisp
+(use-package company
+ :ensure t
+ :defer t
+ :diminish company-mode
+ :config
+(setq company-idle-delay 0)
+(setq company-minimum-prefix-length 1)
+ :hook
+(prog-mode . company-mode))
+#+END_SRC  
+
+** eglot
+#+BEGIN_SRC emacs-lisp
+(use-package eglot
+ :ensure t
+ :defer t
+ :hook
+((c-mode . eglot-ensure)
+(c++-mode . eglot-ensure)
+(java-mode . eglot-ensure)
+(rust-mode . eglot-ensure)
+(html-mode . eglot-ensure)
+(css-mode . eglot-ensure)
+(js-mode . eglot-ensure)))
+#+END_SRC  
+
+** languages and git
+#+BEGIN_SRC emacs-lisp
+(use-package rust-mode :ensure t :defer t)
+(use-package web-mode :ensure t
+ :defer t
+ :mode ("\.html\'" "\.css\'"))
+(use-package magit
+ :ensure t
+ :commands (magit-status))
+#+END_SRC  
+
+** yasnippet
+#+BEGIN_SRC emacs-lisp
+(use-package yasnippet
+ :ensure t
+ :defer t
+ :diminish yas-minor-mode
+ :config
+(yas-global-mode 1))
+(use-package yasnippet-snippets :ensure t :defer t)
+#+END_SRC
+
+** markdown-mode
+#+BEGIN_SRC emacs-lisp
+(use-package markdown-mode
+ :ensure t
+ :mode ("README\\.md\\'" . gfm-mode)
+ :init (setq markdown-command "multimarkdown")
+ :bind (:map markdown-mode-map
+("C-c C-e" . markdown-do)))
+#+END_SRC
