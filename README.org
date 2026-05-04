@@ -18,11 +18,12 @@ After installing, the first run of Emacs will take a bit longer, as it has to in
 #+BEGIN_SRC emacs-lisp
 (setq mac-option-modifier 'meta)
 (setq mac-command-modifier 'super)
+
 (use-package exec-path-from-shell
- :ensure t
- :config
-(when (memq window-system '(mac ns x))
-(exec-path-from-shell-initialize)))
+  :ensure t
+  :config
+  (when (memq window-system '(mac ns x))
+    (exec-path-from-shell-initialize)))
 #+END_SRC  
 
 ** Show line numbers
@@ -76,17 +77,17 @@ After installing, the first run of Emacs will take a bit longer, as it has to in
 ** Creating new window switches cursor to it
 #+BEGIN_SRC emacs-lisp
 (defun split-and-follow-horizontally ()
-(interactive)
-(split-window-below)
-(balance-windows)
-(other-window 1))
+  (interactive)
+  (split-window-below)
+  (balance-windows)
+  (other-window 1))
 (global-set-key (kbd "C-x 2") 'split-and-follow-horizontally)  
 
 (defun split-and-follow-vertically ()
-(interactive)
-(split-window-right)
-(balance-windows)
-(other-window 1))
+  (interactive)
+  (split-window-right)
+  (balance-windows)
+  (other-window 1))
 (global-set-key (kbd "C-x 3") 'split-and-follow-vertically)
 #+END_SRC  
 
@@ -94,115 +95,125 @@ After installing, the first run of Emacs will take a bit longer, as it has to in
 ** diminish
 #+BEGIN_SRC emacs-lisp
 (use-package diminish
- :ensure t)
+  :ensure t)
 #+END_SRC  
 
 ** spaceline and powerline
 #+BEGIN_SRC emacs-lisp
 (use-package spaceline
- :ensure t)  
+  :ensure t)  
 
 (use-package powerline
- :ensure t
- :init
-(spaceline-spacemacs-theme)
- :hook
-(after-init . powerline-reset))
+  :ensure t
+  :init
+  (spaceline-spacemacs-theme)
+  :hook
+  (after-init . powerline-reset))
 #+END_SRC  
 
 ** dashboard
 #+BEGIN_SRC emacs-lisp
 (use-package dashboard
- :ensure t
- :config
-(dashboard-setup-startup-hook)
-(setq dashboard-banner-logo-title "V E N T U R E M A C S")
-(setq dashboard-startup-banner (expand-file-name "venturemacs.png" user-emacs-directory))
-(setq dashboard-footer-messages '("It's Venture!"))
-(setq dashboard-items '((recents . 5)))
-(setq dashboard-center-content t)
-(setq dashboard-items-default-alignment 'center)
-(setq dashboard-set-heading-icons t)
-(setq dashboard-set-file-icons t))
+  :ensure t
+  :config
+  (dashboard-setup-startup-hook)
+  (setq dashboard-banner-logo-title "V E N T U R E M A C S")
+  (setq dashboard-startup-banner (expand-file-name "venturemacs.png" user-emacs-directory))
+  (setq dashboard-footer-messages '("It's Venture!"))
+  (setq dashboard-items '((recents . 5)))
+  (setq dashboard-center-content t)
+  (setq dashboard-items-default-alignment 'center)
+  (setq dashboard-set-heading-icons t)
+  (setq dashboard-set-file-icons t))
 #+END_SRC  
 
 ** completion ui
 #+BEGIN_SRC emacs-lisp
 (use-package vertico
- :ensure t
- :init
-(vertico-mode))  
+  :ensure t
+  :init
+  (vertico-mode))  
 
 (use-package orderless
- :ensure t
- :custom
-(completion-styles '(orderless basic)))  
+  :ensure t
+  :custom
+  (completion-styles '(orderless basic)))  
 
 (use-package marginalia
- :ensure t
- :init
-(marginalia-mode))
+  :ensure t
+  :init
+  (marginalia-mode))
 #+END_SRC  
 
 ** company
 #+BEGIN_SRC emacs-lisp
 (use-package company
- :ensure t
- :defer t
- :diminish company-mode
- :config
-(setq company-idle-delay 0)
-(setq company-minimum-prefix-length 1)
- :hook
-(prog-mode . company-mode))
+  :ensure t
+  :defer t
+  :diminish company-mode
+  :config
+  (setq company-idle-delay 0)
+  (setq company-minimum-prefix-length 1)
+  :hook
+  (prog-mode . company-mode))
 #+END_SRC  
 
 ** eglot
 #+BEGIN_SRC emacs-lisp
 (use-package eglot
- :ensure t
- :defer t
- :hook
-((c-mode . eglot-ensure)
-(c++-mode . eglot-ensure)
-(java-mode . eglot-ensure)
-(rust-mode . eglot-ensure)
-(html-mode . eglot-ensure)
-(css-mode . eglot-ensure)
-(js-mode . eglot-ensure)))
+  :ensure t
+  :defer t
+  :hook
+  ((c-mode . eglot-ensure)
+   (c++-mode . eglot-ensure)
+   (java-mode . eglot-ensure)
+   (rust-mode . eglot-ensure)
+   (html-mode . eglot-ensure)
+   (css-mode . eglot-ensure)
+   (js-mode . eglot-ensure)))
 #+END_SRC  
 
 ** rust, web mode
 #+BEGIN_SRC emacs-lisp
-(use-package rust-mode :ensure t :defer t)
-(use-package web-mode :ensure t
- :defer t
- :mode ("\.html\'" "\.css\'"))
+(use-package rust-mode
+  :ensure t
+  :defer t)
+
+(use-package web-mode
+  :ensure t
+  :defer t
+  :mode ("\.html\'" "\.css\'"))
+#+END_SRC
 
 ** git
 #+BEGIN_SRC emacs-lisp
 (use-package magit
- :ensure t
- :commands (magit-status))
+  :ensure t
+  :commands (magit-status))
 #+END_SRC  
 
 ** yasnippet
 #+BEGIN_SRC emacs-lisp
 (use-package yasnippet
- :ensure t
- :defer t
- :diminish yas-minor-mode
- :config
-(yas-global-mode 1))
-(use-package yasnippet-snippets :ensure t :defer t)
+  :ensure t
+  :defer t
+  :diminish yas-minor-mode
+  :config
+  (yas-global-mode 1))
+
+(use-package yasnippet-snippets
+  :ensure t
+  :defer t)
 #+END_SRC
 
 ** markdown-mode
 #+BEGIN_SRC emacs-lisp
 (use-package markdown-mode
- :ensure t
- :mode ("README\\.md\\'" . gfm-mode)
- :init (setq markdown-command "multimarkdown")
- :bind (:map markdown-mode-map
-("C-c C-e" . markdown-do)))
+  :ensure t
+  :mode ("README\\.md\\'" . gfm-mode)
+  :init
+  (setq markdown-command "multimarkdown")
+  :bind
+  (:map markdown-mode-map
+        ("C-c C-e" . markdown-do)))
 #+END_SRC

@@ -1,5 +1,5 @@
 (defvar startup/file-name-handler-alist file-name-handler-alist)
-  (setq file-name-handler-alist nil)
+(setq file-name-handler-alist nil)
 
 (defun startup/revert-file-name-handler-alist ()
   (setq file-name-handler-alist startup/file-name-handler-alist))
@@ -34,7 +34,7 @@
          (fh (frame-pixel-height f))
          (x (/ (- dw fw) 2))
          (y (/ (- dh fh) 2)))
-      (set-frame-position f x y)))
+    (set-frame-position f x y)))
 
 (add-to-list 'initial-frame-alist '(width . 180))
 (add-to-list 'initial-frame-alist '(height . 60))
