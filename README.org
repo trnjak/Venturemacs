@@ -4,6 +4,7 @@
 
 * About
 These files were made to make Emacs usable on modern macOS, as well as make it look cool.
+I used [[https://github.com/snackon/Witchmacs][Witchmacs]] as a base for creating this.
 
 * Install
 #+BEGIN_SRC shell
@@ -13,7 +14,7 @@ git clone https://github.com/trnjak/Venturemacs.git ~/.emacs.d/
 After installing, the first run of Emacs will take a bit longer, as it has to install the packages listed in the README.org file for the first time.
 
 * Configuration
-** for macOS
+** Optimisations for macOS
 #+BEGIN_SRC emacs-lisp
 (setq mac-option-modifier 'meta)
 (setq mac-command-modifier 'super)
@@ -24,55 +25,55 @@ After installing, the first run of Emacs will take a bit longer, as it has to in
 (exec-path-from-shell-initialize)))
 #+END_SRC  
 
-** line numbers
+** Show line numbers
 #+BEGIN_SRC emacs-lisp
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
 #+END_SRC  
 
-** parent parentheses
+** Show parent parenthesess
 #+BEGIN_SRC emacs-lisp
 (show-paren-mode 1)
 #+END_SRC  
 
-** default startup screen off
+** Turn off default start screen
 #+BEGIN_SRC emacs-lisp
 (setq inhibit-startup-message t)
 #+END_SRC  
 
-** most gui off
+** Turn off most GUI elements
 #+BEGIN_SRC emacs-lisp
 (tool-bar-mode -1)
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
 #+END_SRC  
 
-** clipboard outside of emacs on
+** Enable copypasting outside of Emacs
 #+BEGIN_SRC emacs-lisp
 (setq x-select-enable-clipboard t)
 #+END_SRC  
 
-** disable backup files
+** Disable automatic creation of backup files
 #+BEGIN_SRC emacs-lisp
 (setq make-backup-files nil)
 (setq auto-save-default nil)
 #+END_SRC  
 
-** disable ring-bell
+** Disable ring-bell
 #+BEGIN_SRC emacs-lisp
 (setq ring-bell-function 'ignore)
 #+END_SRC  
 
-** highlight line
+** Highlight line
 #+BEGIN_SRC emacs-lisp
 (global-hl-line-mode t)
 #+END_SRC  
 
-** transform yes-or-no into y-or-n
+** Transform yes-or-no into y-or-n
 #+BEGIN_SRC emacs-lisp
 (defalias 'yes-or-no-p 'y-or-n-p)
 #+END_SRC  
 
-** creating new window switches cursor
+** Creating new window switches cursor to it
 #+BEGIN_SRC emacs-lisp
 (defun split-and-follow-horizontally ()
 (interactive)
@@ -95,7 +96,7 @@ After installing, the first run of Emacs will take a bit longer, as it has to in
  :ensure t)
 #+END_SRC  
 
-** init spaceline and powerline
+** spaceline and powerline
 #+BEGIN_SRC emacs-lisp
 (use-package spaceline
  :ensure t)  
@@ -108,7 +109,7 @@ After installing, the first run of Emacs will take a bit longer, as it has to in
 (after-init . powerline-reset))
 #+END_SRC  
 
-** init dashboard
+** dashboard
 #+BEGIN_SRC emacs-lisp
 (use-package dashboard
  :ensure t
@@ -124,7 +125,7 @@ After installing, the first run of Emacs will take a bit longer, as it has to in
 (setq dashboard-set-file-icons t))
 #+END_SRC  
 
-** completion ui init
+** completion ui
 #+BEGIN_SRC emacs-lisp
 (use-package vertico
  :ensure t
@@ -142,7 +143,7 @@ After installing, the first run of Emacs will take a bit longer, as it has to in
 (marginalia-mode))
 #+END_SRC  
 
-** programming stuff below
+** company
 #+BEGIN_SRC emacs-lisp
 (use-package company
  :ensure t
@@ -170,12 +171,15 @@ After installing, the first run of Emacs will take a bit longer, as it has to in
 (js-mode . eglot-ensure)))
 #+END_SRC  
 
-** languages and git
+** rust, web mode
 #+BEGIN_SRC emacs-lisp
 (use-package rust-mode :ensure t :defer t)
 (use-package web-mode :ensure t
  :defer t
  :mode ("\.html\'" "\.css\'"))
+
+** git
+#+BEGIN_SRC emacs-lisp
 (use-package magit
  :ensure t
  :commands (magit-status))
