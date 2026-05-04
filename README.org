@@ -3,7 +3,7 @@
 [[file:venturemacs.png]]
 
 * About
-These files were made to make Emacs usable on modern macOS, as well as make it look cool.
+These files were made to make Emacs usable on modern macOS, as well as make it look cool.\\
 I used [[https://github.com/snackon/Witchmacs][Witchmacs]] as a base for creating this.
 
 * Install
@@ -90,6 +90,7 @@ After installing, the first run of Emacs will take a bit longer, as it has to in
 (global-set-key (kbd "C-x 3") 'split-and-follow-vertically)
 #+END_SRC  
 
+* Packages
 ** diminish
 #+BEGIN_SRC emacs-lisp
 (use-package diminish
