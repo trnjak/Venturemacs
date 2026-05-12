@@ -1,3 +1,9 @@
+(when (eq system-type 'darwin)
+  (setq ns-pop-up-frames nil)
+  (add-hook 'emacs-startup-hook
+	    (lambda () (run-with-idle-timer 1 nil
+					    (lambda () (setq ns-pop-up-frames t))))))
+
 (defvar startup/file-name-handler-alist file-name-handler-alist)
 (setq file-name-handler-alist nil)
 
