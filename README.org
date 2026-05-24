@@ -4,7 +4,9 @@
 
 * About
 These files were made to make Emacs usable on modern macOS, as well as make it look cool.\\
-I used [[https://github.com/snackon/Witchmacs][Witchmacs]] as a base for creating this.
+While it consists mostly of things that are useful to me, the configuration is very minimal and modular, so anyone can easily build upon it. :)\\
+
+I plan to keep Venturemacs up to date with any changes to Emacs and its packages, as well as add more features when I find them useful.
 
 * Install
 #+BEGIN_SRC shell
@@ -12,6 +14,18 @@ git clone https://github.com/trnjak/Venturemacs.git ~/.emacs.d/
 #+END_SRC
 
 After installing, the first run of Emacs will take a bit longer, as it has to install the packages listed in the README.org file for the first time.
+
+The default theme is Venturemacs-light. To change it to the dark theme, change this part of init.el:
+
+#+BEGIN_SRC lisp
+(load-theme 'Venturemacs-light t)
+#+END_SRC
+
+to:
+
+#+BEGIN_SRC lisp
+(load-theme 'Venturemacs t)
+#+END_SRC
 
 * Configuration
 ** Optimisations for macOS
@@ -31,7 +45,7 @@ After installing, the first run of Emacs will take a bit longer, as it has to in
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
 #+END_SRC  
 
-** Show parent parenthesess
+** Show parent parentheses
 #+BEGIN_SRC emacs-lisp
 (show-paren-mode 1)
 #+END_SRC  
@@ -50,7 +64,7 @@ After installing, the first run of Emacs will take a bit longer, as it has to in
 
 ** Enable copypasting outside of Emacs
 #+BEGIN_SRC emacs-lisp
-(setq x-select-enable-clipboard t)
+(setq select-enable-clipboard t)
 #+END_SRC  
 
 ** Disable automatic creation of backup files
@@ -182,7 +196,7 @@ After installing, the first run of Emacs will take a bit longer, as it has to in
 (use-package web-mode
   :ensure t
   :defer t
-  :mode ("\.html\'" "\.css\'"))
+  :mode ("\\.html\\'" "\\.css\\'"))
 #+END_SRC
 
 ** git
