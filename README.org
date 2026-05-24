@@ -4,7 +4,7 @@
 
 * About
 These files were made to make Emacs usable on modern macOS, as well as make it look cool.\\
-While it consists mostly of things that are useful to me, the configuration is very minimal and modular, so anyone can easily build upon it. :)\\
+While it consists mostly of things that are useful to me, the configuration is very minimal and modular, so anyone can easily build upon it :).\\
 
 I plan to keep Venturemacs up to date with any changes to Emacs and its packages, as well as add more features when I find them useful.
 
