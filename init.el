@@ -47,20 +47,10 @@
 (add-hook 'window-setup-hook #'my/center-frame)
 
 (add-to-list 'custom-theme-load-path user-emacs-directory)
-(load-theme 'Venturemacs t)
+(load-theme 'Venturemacs-light t)
 
 (require 'org)
 (org-babel-load-file (expand-file-name "README.org" user-emacs-directory))
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-safe-themes
-   '("5f2b44690d275ca323c715890e6da639ea64903276d8aa20928fe49d8f3edf35"
-     "0260eb2210c76ddee591d10b9fe129abb1132a91ffb0d4633e6567226a75b2e3"
-     default))
- '(package-selected-packages nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

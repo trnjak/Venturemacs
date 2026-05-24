@@ -65,4 +65,5 @@
  '(which-key-key-face ((t (:foreground "#B181B1" :weight bold))))
  '(which-key-group-description-face ((t (:foreground "#8BA4B1"))))
  '(which-key-command-description-face ((t (:foreground "#CCCCCC")))))
+ 
 (provide-theme 'Venturemacs)
