@@ -64,6 +64,9 @@
  '(dashboard-banner-logo-title ((t (:foreground "#B181B1" :weight bold))))
  '(which-key-key-face ((t (:foreground "#B181B1" :weight bold))))
  '(which-key-group-description-face ((t (:foreground "#8BA4B1"))))
- '(which-key-command-description-face ((t (:foreground "#CCCCCC")))))
- 
+ '(which-key-command-description-face ((t (:foreground "#CCCCCC"))))
+ '(web-mode-html-tag-face ((t (:foreground "#B181B1"))))
+ '(web-mode-html-attr-name-face ((t (:foreground "#C67878"))))
+ '(web-mode-html-attr-value-face ((t (:foreground "#88B088")))))
+
 (provide-theme 'Venturemacs)
